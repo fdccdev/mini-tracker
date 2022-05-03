@@ -1,5 +1,18 @@
+body {
+  overflow: hidden;
+}
 .App {
   text-align: center;
+}
+
+.iframe-info{
+  width: 270%;
+  height: 1200px;
+  transform: scale(.25);
+  position: relative;
+  top: -445px;
+  left: -543px;
+  border: 6px solid #ccc;
 }
 
 .App-logo {
