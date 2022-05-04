@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
-import {getInfo} from './services/dataGet'
+import { Page } from './components/page'
+import { getInfo } from './services/dataGet'
 
 function App() {
   const [url, setUrl] = useState('')
@@ -8,10 +9,6 @@ function App() {
 
   function handleInput(event) {
     setUrl(event.target.value)
-  }
-
-  const copyClipboard = () => {
-    navigator.clipboard.writeText(page.external_url.slice(0, 46))
   }
 
   const is_not_in_index_of = -1
@@ -25,7 +22,7 @@ function App() {
         const name_file = file[file.length - 1]
         file.pop()
         setPage({
-          external_url:file.join('/'),
+          external_url: file.join('/'),
           ftp_folder: name_file,
           id_static: data.id,
         })
@@ -42,8 +39,8 @@ function App() {
     <div className="App">
       <h1>Mini-tracker</h1>
       <hr />
-      <div className="row" style={{ padding: '20px' }}>
-        <div className="column">
+      <div className="row" style={{ padding: '0 180px' }}>
+        <div className="column col-md-6">
           <input type="text" onChange={handleInput} />
           <button className="outline" onClick={getUrlInfo}>
             cargar url
@@ -51,26 +48,14 @@ function App() {
           <hr />
           <div className="column">
             {page ? (
-              <div>
-                <p>Ruta ftp: </p>
-                <pre>{page.external_url}</pre>
-                <p>Nombre archivo:</p>
-                <pre>{page.ftp_folder}</pre>
-                <button onClick={copyClipboard}>Copy</button>
-              </div>
+              <Page
+                external_url={page.external_url}
+                ftp_folder={page.ftp_folder}
+              />
             ) : null}
             <br />
             {page ? <b>ID static page: {page.id_static}</b> : null}
           </div>
-        </div>
-        <div className="column">
-          <iframe
-            className="iframe-info"
-            width={'135%'}
-            height={'600'}
-            src={url}
-            title="iframe-preview"
-          ></iframe>
         </div>
       </div>
     </div>

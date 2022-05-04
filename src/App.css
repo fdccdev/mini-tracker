@@ -49,3 +49,15 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.button, button, input[type='button'], input[type='reset'], input[type='submit'] {
+  background-color: #add500;
+  border: 0.1rem solid #add500;
+}
+input[type='text']:focus {  
+  border: 0.1rem solid #add500;
+}
+
+pre {
+  border-left: 0.3rem solid #add500;
+}
