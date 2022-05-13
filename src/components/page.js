@@ -2,7 +2,8 @@ import React from 'react'
 
 export const Page = ({ external_url, ftp_folder }) => {
   const copyClipboard = () => {
-    navigator.clipboard.writeText(external_url.slice(0, 46))
+    console.log(external_url)
+    navigator.clipboard.writeText(external_url)
   }
   return (
     <div>
