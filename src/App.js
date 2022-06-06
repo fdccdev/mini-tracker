@@ -11,24 +11,31 @@ function App() {
     setUrl(event.target.value)
   }
 
-  const is_not_in_index_of = -1
-
   const getUrlInfo = async () => {
-    try {
-      if (url.indexOf('staticPageId') !== is_not_in_index_of) {
+    try {      
         const data = await getInfo(url)
-        const file = data.externalDataUrl.split('/')
-        file[0] = '/produccion'
-        const name_file = file[file.length - 1]
-        file.pop()
-        setPage({
-          external_url: file.join('/'),
-          ftp_folder: name_file,
-          id_static: data.id,
-        })
-      } else {
-        alert('La url no es valida!')
-      }
+        if(data.url){       
+          const file = data.url.split('/')
+          file[0] = '/produccion'
+          const name_file = file[file.length - 1]
+          file.pop()
+          setPage({
+            external_url: file.join('/'),
+            ftp_folder: name_file.split('?')[0],
+            id_static: null,
+          })
+        }else {
+          const file = data.externalDataUrl.split('/')
+          file[0] = '/produccion'
+          const name_file = file[file.length - 1]
+          file.pop()
+          setPage({
+            external_url: file.join('/'),
+            ftp_folder: name_file,
+            id_static: data.id,
+          })
+        }
+      
       return {}
     } catch (err) {
       console.log(err)
@@ -54,7 +61,7 @@ function App() {
               />
             ) : null}
             <br />
-            {page ? <b>ID static page: {page.id_static}</b> : null}
+            {page ? <b>ID static page: {page.id_static ? page.id_static : 'Does not include'}</b> : null}
           </div>
         </div>
       </div>
